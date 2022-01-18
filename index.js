@@ -24,6 +24,10 @@ app.engine(
 app.set('view engine', '.hbs');
 
 app.get('/', (req, res) => {
+  res.redirect('/children');
+});
+
+app.get('/children', (req, res) => {
   res.render('children/list');
 });
 
