@@ -1,9 +1,13 @@
 const { Router } = require('express');
+const { ChildRecord } = require('../records/child.record');
 
 const childRouter = Router();
 
 childRouter.get('/', (req, res) => {
-  res.render('children/list');
+  const childrenList = ChildRecord.listAll();
+  res.render('children/list', {
+    childrenList,
+  });
 });
 
 module.exports = {
