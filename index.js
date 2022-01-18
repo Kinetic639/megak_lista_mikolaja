@@ -1,6 +1,8 @@
 const express = require('express');
 const { engine } = require('express-handlebars');
 const methodOverride = require('method-override');
+const { childRouter } = require('./routers/child');
+const { homeRouter } = require('./routers/home');
 const { handleError } = require('./utils/errors');
 
 const app = express();
@@ -23,13 +25,9 @@ app.engine(
 
 app.set('view engine', '.hbs');
 
-app.get('/', (req, res) => {
-  res.redirect('/children');
-});
+app.use('/', homeRouter);
+app.use('/child', childRouter);
 
-app.get('/children', (req, res) => {
-  res.render('children/list');
-});
 
 //'globalna obsługa błędów'
 app.use(handleError);
