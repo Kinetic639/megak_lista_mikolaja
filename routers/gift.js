@@ -3,8 +3,8 @@ const { GiftRecord } = require('../records/gift.record');
 
 const giftRouter = Router();
 
-giftRouter.get('/', (req, res) => {
-  const giftsList = GiftRecord.listAll();
+giftRouter.get('/', async (req, res) => {
+  const giftsList = await GiftRecord.listAll();
   res.render('gifts/list', {
     giftsList,
   });
