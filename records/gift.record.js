@@ -42,12 +42,22 @@ class GiftRecord {
         id,
       },
     );
-    return results.length === 0 ? null : results[0];
+    return results.length === 0 ? null : new GiftRecord(results[0]);
   }
 
   static async listAll() {
-    const [result] = await pool.execute('SELECT * FROM `gifts`');
-    return result;
+    const [results] = await pool.execute('SELECT * FROM `gifts`');
+    return results.map((obj) => new GiftRecord(obj));
+  }
+
+  async countGivenGifts() {
+    const [[{ count }]] = await pool.execute(
+      'SELECT COUNT(*) AS `count` FROM `children` WHERE `giftId` = :id',
+      {
+        id: this.id,
+      },
+    );
+    return count;
   }
 }
 
