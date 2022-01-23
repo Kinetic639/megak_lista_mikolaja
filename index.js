@@ -1,4 +1,5 @@
 const express = require('express');
+require('express-async-errors');
 const { engine } = require('express-handlebars');
 const methodOverride = require('method-override');
 const { childRouter } = require('./routers/child');
