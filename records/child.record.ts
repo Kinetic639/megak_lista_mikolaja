@@ -9,7 +9,7 @@ type ChildRecordResult = [ChildRecord[], FieldPacket[]];
 export class ChildRecord {
   id?: string;
   name: string;
-  giftId: string;
+  giftId: string | null;
 
   constructor(obj: ChildRecord) {
     if (!obj.name || obj.name.length < 3 || obj.name.length > 25) {
