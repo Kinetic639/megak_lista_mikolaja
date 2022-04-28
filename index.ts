@@ -8,6 +8,8 @@ import {childRouter} from "./routers/child";
 import {giftRouter} from "./routers/gift";
 import {handlebarsHelpers} from "./utils/handlebars-helpers";
 import'./utils/db';
+import {config} from "dotenv";
+const dotenv = config();
 
 const PORT = process.env.PORT || 3002
 
