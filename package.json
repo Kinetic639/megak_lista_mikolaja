@@ -26,11 +26,10 @@
   },
   "scripts": {
     "postinstall": "tsc",
-    "start": "serve -s build",
+    "start": "node build/index.js",
     "build": "tsc",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "postbuild": "tsc"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
