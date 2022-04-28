@@ -26,7 +26,6 @@
   "scripts": {
     "start": "ts-node index.ts",
     "start:dev": "tsnd index.ts",
-    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
