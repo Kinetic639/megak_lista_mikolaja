@@ -1,28 +1,60 @@
 {
-  "name": "megak_workout",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Kinetic639/megak_workout.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Kinetic639/megak_workout/issues"
-  },
-  "homepage": "https://github.com/Kinetic639/megak_workout#readme",
+  "name": "megak-lista-mikolaja-ts",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "express": "^4.17.2",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.1.1",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.4.1",
+    "@types/react": "^18.0.8",
+    "@types/react-dom": "^18.0.0",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.0",
+    "express": "^4.18.0",
     "express-async-errors": "^3.1.1",
-    "express-handlebars": "^6.0.2",
+    "express-handlebars": "^6.0.5",
     "method-override": "^3.0.0",
     "mysql2": "^2.3.3",
-    "uuid": "^8.3.2"
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-scripts": "5.0.1",
+    "typescript": "^4.6.3",
+    "uuid": "^8.3.2",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "ts-node index.ts",
+    "start:dev": "tsnd index.ts",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.3",
+    "@types/express": "^4.17.13",
+    "@types/method-override": "^0.0.32",
+    "@types/node": "^17.0.29",
+    "@types/uuid": "^8.3.4",
+    "ts-node": "^10.7.0",
+    "ts-node-dev": "^1.1.8"
   }
 }
