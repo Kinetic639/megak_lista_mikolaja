@@ -6,7 +6,7 @@ import {CreateChildReq, ListChildrenRes, SetGiftForChildReq} from "../types";
 
 export const childRouter = Router();
 
-childRouter // /child
+childRouter // /children
 
     .get('/', async (req, res) => {
         const childrenList = await ChildRecord.listAll();
@@ -16,6 +16,22 @@ childRouter // /child
             childrenList,
             giftsList,
         } as ListChildrenRes);
+    })
+
+    .delete('/:id', async (req, res) => {
+        const child = await ChildRecord.getOne(req.params.id);
+
+        if (!child) {
+            throw new ValidationError('No such child.');
+        }
+
+        if (child.giftId) {
+            throw new ValidationError('Remove gift from child, before deleting it.');
+        }
+
+        await child.delete();
+
+        res.end();
     })
 
     .post('/', async (req, res) => {

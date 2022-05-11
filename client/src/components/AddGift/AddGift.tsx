@@ -67,7 +67,7 @@ export const AddGift = () => {
             })
             const data: GiftEntity = await res.json()
             setLoading(false)
-            setResultInfo(`Gift ${data.name} as been added.`)
+            setResultInfo(`Gift ${data.name} has been added.`)
             handleClick()
         }
 

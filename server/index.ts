@@ -10,7 +10,7 @@ import './utils/db';
 const app = express();
 
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: 'https://santas-gifts.netlify.app/gifts',
 }));
 app.use(express.json()); // Content-type: application/json
 

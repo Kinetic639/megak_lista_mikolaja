@@ -8,8 +8,11 @@ import {Appbar} from "../Appbar/Appbar";
 import './Layout.scss'
 import {PermanentDrawer} from "../../../components/Drawer/Drawer";
 import Typography from "@mui/material/Typography";
+interface Props {
+    children:React.ReactNode
+}
 
-export const Layout = ({children}) => {
+export const Layout = ({children}: Props) => {
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
     const handleDrawerToggle = ()  => {

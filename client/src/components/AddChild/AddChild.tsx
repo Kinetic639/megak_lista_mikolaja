@@ -46,34 +46,31 @@ export const AddChild = () => {
             [key]: value,
         }))
     }
-const sendForm = async (e: FormEvent) => {
+
+
+    const sendForm = async (e: FormEvent) => {
         e.preventDefault()
-
-}
-
-    // const sendForm = async (e: FormEvent) => {
-    //     e.preventDefault()
-    //     setNameError(false)
-    //     setCountError(false)
+        setNameError(false)
+        // setCountError(false)
     //
-    //     if (!form.name || form.name.length < 3 || form.name.length > 55) {
-    //         setNameError(true)
+        if (!form.name || form.name.length < 3 || form.name.length > 55) {
+            setNameError(true)
     //     } else if (!form.count || form.count < 1 || form.count > 999999) {
     //         setCountError(true)
-    //     } else {
-    //         setLoading(true)
-    //
-    //         const res = await fetch(`http://localhost:3001/children`, {
-    //             method: 'POST',
-    //             headers: {'Content-Type': 'application/json'},
-    //             body: JSON.stringify(form)
-    //         })
-    //         const data: GiftEntity = await res.json()
-    //         setLoading(false)
-    //         setResultInfo(`Gift ${data.name} as been added.`)
-    //         handleClick()
-    //     }
-    // }
+        } else {
+            setLoading(true)
+
+            const res = await fetch(`http://localhost:3001/children`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(form)
+            })
+            const data: ChildEntity = await res.json()
+            setLoading(false)
+            setResultInfo(`Child ${data.name} has been added.`)
+            handleClick()
+        }
+    }
 
     if (loading) {
         return <Spinner/>
@@ -89,7 +86,7 @@ const sendForm = async (e: FormEvent) => {
             </Alert>
         </Snackbar>
         <Grid container sx={{maxWidth: '400px', }}>
-            <Grid xs={12}  md={7}>
+            <Grid item xs={12}  md={7}>
                 <TextField
                     sx={{width: '100%'}}
                     value={form.name}

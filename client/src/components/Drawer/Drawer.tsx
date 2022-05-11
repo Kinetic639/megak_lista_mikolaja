@@ -49,9 +49,14 @@ interface Props {
 export const PermanentDrawer = ( props: Props) => {
     const drawerWidth = props.width;
     const location = useLocation();
+    interface customProps{
+        to: string,
+        primary: string,
+        children: React.ReactNode
+    }
 
 
-    const CustomListItem = ({to, primary, children}) => (
+    const CustomListItem = ({to, primary, children}: customProps) => (
         <ListItemButton
             component={RouterLink}
             to={to}
