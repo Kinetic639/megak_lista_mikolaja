@@ -3,8 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",
+  "type": "module",
+  "engines": {
+    "node": "16.x",
+    "npm": "7.x"
+  },
   "scripts": {
-    "start": "ts-node index.ts",
+    "start": "node dist/index.js",
+    "build": "tsc",
     "start:dev": "tsnd index.ts"
   },
   "keywords": [],
