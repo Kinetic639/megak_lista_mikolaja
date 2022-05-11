@@ -13,7 +13,7 @@ export const SingleGiftView = () => {
 
     useEffect(() => {
         (async () => {
-            const res = await fetch(`http://localhost:3001/gifts/${giftId}`)
+            const res = await fetch(`${process.env.HOST}/gifts/${giftId}`)
             const data = await res.json()
             setGiftInfo(data)
         })()

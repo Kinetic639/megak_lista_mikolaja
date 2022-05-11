@@ -8,7 +8,7 @@ export const ChildrenList = () => {
 
     const refreshChildren = async () => {
         setGiftsList(null)
-        const res = await fetch('http://localhost:3001/children')
+        const res = await fetch(`${process.env.HOST}/children`)
         const data = await res.json()
         setGiftsList(data.childrenList)
     }

@@ -60,7 +60,7 @@ export const AddGift = () => {
         } else {
             setLoading(true)
 
-            const res = await fetch(`http://localhost:3001/gifts`, {
+            const res = await fetch(`${process.env.HOST}/gifts`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(form)

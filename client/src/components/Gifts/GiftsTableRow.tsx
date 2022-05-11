@@ -32,7 +32,7 @@ export const GiftsTableRow = ({gift, onGiftsChange}: Props) => {
         e.preventDefault()
 
 
-        const res = await fetch(`http://localhost:3001/gifts/${gift.id}`, {
+        const res = await fetch(`${process.env.HOST}/gifts/${gift.id}`, {
             method: 'DELETE'
         })
         if ([400, 500].includes(res.status)) {
