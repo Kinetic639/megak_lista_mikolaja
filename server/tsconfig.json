@@ -4,10 +4,9 @@
     "preserveConstEnums": true,
     "sourceMap": true,
     "target": "es6",
-    "skipLibCheck": true,
-    "downlevelIteration" : true,
-    "lib" : ["es6", "dom.iterable"],
-    "outDir": "dist",
+    "downlevelIteration": true,
+    "lib": ["es6", "DOM.Iterable"],
+    "outDir": "build",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "moduleResolution": "Node"
