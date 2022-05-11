@@ -1,14 +1,11 @@
 {
   "compilerOptions": {
-    "noImplicitAny": true,
-    "preserveConstEnums": true,
+    "module": "commonjs",
+    "target": "esnext",
+    "moduleResolution": "node",
     "sourceMap": true,
-    "target": "es6",
-    "downlevelIteration": true,
-    "lib": ["es6", "DOM.Iterable"],
     "outDir": "build",
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "moduleResolution": "Node"
+    "allowJs": true,
+    "lib": ["dom", "es6"]
   }
 }

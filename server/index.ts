@@ -11,7 +11,8 @@ const app = express();
 
 app.use(
   cors({
-    origin: 'https://santas-gifts.netlify.app',
+    // origin: 'https://santas-gifts.netlify.app',
+    origin: 'http://localhost:3000',
   }),
 );
 app.use(express.json()); // Content-type: application/json
