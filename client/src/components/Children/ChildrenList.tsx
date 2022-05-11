@@ -8,7 +8,7 @@ export const ChildrenList = () => {
 
     const refreshChildren = async () => {
         setGiftsList(null)
-        const res = await fetch(`${process.env.HOST}/children`)
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/children`)
         const data = await res.json()
         setGiftsList(data.childrenList)
     }

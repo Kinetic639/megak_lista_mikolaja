@@ -7,7 +7,6 @@ import {Layout} from "./views/Layout/Layout/Layout";
 import {NotFoundView} from "./views/NotFoundView/NotFoundView";
 import {SingleGiftView} from "./views/SingleGiftView/SingleGiftView";
 import {ChildrenView} from "./views/ChildrenView/ChildrenView";
-
 export const App = () => {
     const location = useLocation()
     return (

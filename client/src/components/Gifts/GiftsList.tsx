@@ -2,15 +2,13 @@ import React, {useEffect, useState} from 'react';
 import {GiftsTable} from './GiftsTable';
 import {GiftEntity} from 'types'
 import {Spinner} from "../comon/Spinner/Spinner";
-import * as dotenv from "dotenv"
-dotenv.config()
 
 export const GiftsList = () => {
     const [giftsList, setGiftsList] = useState<GiftEntity[] | null>(null)
 
     const refreshGifts = async () => {
         setGiftsList(null)
-        const res = await fetch(`${process.env.HOST}/gifts`)
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/gifts`)
         const data = await res.json()
         setGiftsList(data.giftsList)
     }

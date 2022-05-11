@@ -32,7 +32,7 @@ export const ChildrenTableRow = ({child, onChildrenChange}: Props) => {
         e.preventDefault()
 
 
-        const res = await fetch(`${process.env.HOST}/children/${child.id}`, {
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/children/${child.id}`, {
             method: 'DELETE'
         })
         if ([400, 500].includes(res.status)) {

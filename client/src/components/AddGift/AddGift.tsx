@@ -60,7 +60,7 @@ export const AddGift = () => {
         } else {
             setLoading(true)
 
-            const res = await fetch(`${process.env.HOST}/gifts`, {
+            const res = await fetch(`${process.env.REACT_APP_API_URL}/gifts`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(form)
