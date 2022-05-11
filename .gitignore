@@ -2,7 +2,7 @@
 .vscode
 
 # Below is a copy of https://github.com/github/gitignore/blob/HEAD/Node.gitignore
-
+*node_modules/*
 # Logs
 logs
 *.log
