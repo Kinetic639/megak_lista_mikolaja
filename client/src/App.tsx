@@ -9,7 +9,6 @@ import {SingleGiftView} from "./views/SingleGiftView/SingleGiftView";
 import {ChildrenView} from "./views/ChildrenView/ChildrenView";
 export const App = () => {
     const location = useLocation()
-    console.log(process.env)
     return (
         <Layout key={location.key}>
             <Routes>

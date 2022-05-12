@@ -12,7 +12,6 @@ const app = express();
 app.use(
   cors({
     origin: 'https://santas-gifts.netlify.app',
-    // origin: 'https://santas-gifts.herokuapp.com/',
     // origin: 'http://localhost:3000',
 
   }),
