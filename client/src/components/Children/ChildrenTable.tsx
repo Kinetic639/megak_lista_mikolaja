@@ -1,9 +1,10 @@
 import React from 'react';
-import {ChildEntity} from 'types';
+import {ChildEntity, GiftEntity} from 'types';
 import {ChildrenTableRow} from './ChildrenTableRow';
 
 interface Props {
-    children: ChildEntity[];
+    childrenList: ChildEntity[];
+    giftsList: GiftEntity[];
     onChildrenChange: () => void;
 }
 
@@ -12,13 +13,13 @@ export const ChildrenTable = (props: Props) => (
         <thead>
         <tr>
             <th>Name</th>
-            <th>Count</th>
+            <th>Gift</th>
             <th>Action</th>
         </tr>
         </thead>
         <tbody>
         {
-            props.children.map((child) => <ChildrenTableRow key={child.id} onChildrenChange={props.onChildrenChange} child={child}/>)
+            props.childrenList.map((child) => <ChildrenTableRow key={child.id} giftsList={props.giftsList} onChildrenChange={props.onChildrenChange} child={child}/>)
         }
         </tbody>
     </table>

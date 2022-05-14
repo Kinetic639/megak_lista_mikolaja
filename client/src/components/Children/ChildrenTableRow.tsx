@@ -1,5 +1,5 @@
 import React, {MouseEvent, useState} from 'react';
-import {ChildEntity} from 'types';
+import {ChildEntity, GiftEntity} from 'types';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Dialog from '@mui/material/Dialog';
@@ -11,13 +11,15 @@ import EditIcon from '@mui/icons-material/Edit';
 import {
     NavLink as RouterLink,
 } from 'react-router-dom';
+import {ChildGiftSelect} from '../ChildGiftSelect/ChildGiftSelect'
 
 interface Props {
     child: ChildEntity;
+    giftsList: GiftEntity[];
     onChildrenChange: () => void;
 }
 
-export const ChildrenTableRow = ({child, onChildrenChange}: Props) => {
+export const ChildrenTableRow = ({child, giftsList, onChildrenChange}: Props) => {
     const [open, setOpen] = useState(false)
 
     const handleClickOpen = () => {
@@ -67,8 +69,10 @@ export const ChildrenTableRow = ({child, onChildrenChange}: Props) => {
             </Dialog>
             <tr>
                 <td>{child.name}</td>
+                <td><ChildGiftSelect childId={child.id as string} giftsList={giftsList} selectedId={child.giftId}/>
+                </td>
                 <td>
-                    <Button component={RouterLink} to={`/gifts/${child.id}`} variant="outlined">
+                    <Button component={RouterLink} to={`/children/${child.id}`} variant="outlined">
                         <EditIcon/>
                     </Button>
                 </td>

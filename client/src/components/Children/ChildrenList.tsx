@@ -1,28 +1,27 @@
 import React, {useEffect, useState} from 'react';
-import {ChildEntity} from 'types'
+import { ListChildrenRes} from 'types'
 import {Spinner} from "../comon/Spinner/Spinner";
 import {ChildrenTable} from "./ChildrenTable";
 
 export const ChildrenList = () => {
-    const [childrenList, setGiftsList] = useState<ChildEntity[] | null>(null)
-
+    const [data, setData] = useState<ListChildrenRes | null>(null)
     const refreshChildren = async () => {
-        setGiftsList(null)
+        setData(null)
         const res = await fetch(`${process.env.REACT_APP_API_URL}/children`)
         const data = await res.json()
-        setGiftsList(data.childrenList)
+        setData(data)
     }
 
     useEffect(() => {
         refreshChildren()
     }, [])
 
-    if (childrenList === null) {
+    if (data === null) {
         return <Spinner/>
     }
     return <>
         <h1>Children:</h1>
-        <ChildrenTable children={childrenList}
+        <ChildrenTable childrenList={data.childrenList} giftsList={data.giftsList}
                     onChildrenChange={refreshChildren}/>
     </>
 }
