@@ -20,11 +20,12 @@ app.use('/children', childRouter);
 app.use('/gifts', giftRouter);
 
 app.use(handleError);
+
 const port = Number(process.env.PORT) || 3001;
 
 app.get('/', (req, res) => {
   res.send(`santas gifts app is running ${port}`);
 });
 app.listen(port, '0.0.0.0', () => {
-  console.log(`Listening on http://localhost:${port}`);
+  console.log(`Listening on http://dotenv:${port}`);
 });
