@@ -1,44 +1,37 @@
-import React, {FormEvent, useState} from 'react';
+import React, {FormEvent,useRef, useEffect, useState} from 'react';
 import {CreateChildReq, ChildEntity} from "types";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {Spinner} from "../comon/Spinner/Spinner";
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert, {AlertProps} from '@mui/material/Alert';
 import Grid from '@mui/material/Grid';
+import { ChildGiftSelect } from '../ChildGiftSelect/ChildGiftSelect';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { RootState } from 'src/app/store';
+import FormControl from '@mui/material/FormControl';
+import { toast } from 'react-toastify';
+import { addChildAsync, getChildrenAsync } from '../../redux/features/children-slice';
 
-const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
-    props,
-    ref,
-) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
+
 
 export const AddChild = () => {
+    const [nameError, setNameError] = useState<boolean>(false)  
+    const [selectedGiftId, setSelectedGiftId] = useState<string>('')
+    const isMounted = useRef(false);
+    const dispatch = useAppDispatch()
+
+    const initialFormState = {
+name: '',
+giftId: selectedGiftId
+    }
+    
     const [form, setForm] = useState<CreateChildReq>({
         name: "",
-        giftId: ''
+        giftId: selectedGiftId
     })
-
-    const [loading, setLoading] = useState<boolean>(false)
-    const [resultInfo, setResultInfo] = useState('')
-    const [nameError, setNameError] = useState<boolean>(false)
-    const [giftError, setGiftError] = useState<boolean>(false)
-
-
-    const [open, setOpen] = React.useState(false);
-
-    const handleClick = () => {
-        setOpen(true);
-    };
-
-    const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
-        setOpen(false);
-    };
+    const clearForm = () => {
+        setForm(initialFormState)
+        setSelectedGiftId('')
+    }
 
     const updateForm = (key: string, value: any) => {
         setForm(form => ({
@@ -47,57 +40,50 @@ export const AddChild = () => {
         }))
     }
 
+    useEffect(() => {
+        if (isMounted.current) {
+            setForm({...form,
+                giftId: selectedGiftId,})   
+        } else {
+          isMounted.current = true;
+        }
+      }, [selectedGiftId]);
+
 
     const sendForm = async (e: FormEvent) => {
         e.preventDefault()
         setNameError(false)
-        // setCountError(false)
-    //
+        
         if (!form.name || form.name.length < 3 || form.name.length > 55) {
             setNameError(true)
-    //     } else if (!form.count || form.count < 1 || form.count > 999999) {
-    //         setCountError(true)
+            toast.error('Name must be between 3 and 55 letters long!')
         } else {
-            setLoading(true)
-
-            const res = await fetch(`${process.env.REACT_APP_API_URL}/children`, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(form)
-            })
-            const data: ChildEntity = await res.json()
-            setLoading(false)
-            setResultInfo(`Child ${data.name} has been added.`)
-            handleClick()
+            dispatch(addChildAsync(form))
+            clearForm()
         }
-    }
-
-    if (loading) {
-        return <Spinner/>
     }
 
 
     return <form noValidate autoComplete="off" onSubmit={sendForm}>
-        <Snackbar
-            anchorOrigin={{vertical: 'top', horizontal: 'center'}} open={open} autoHideDuration={3000}
-            onClose={handleClose}>
-            <Alert onClose={handleClose} severity="success" sx={{width: '100%'}}>
-                {resultInfo}
-            </Alert>
-        </Snackbar>
-        <Grid container sx={{maxWidth: '400px', }}>
-            <Grid item xs={12}  md={7}>
+        <Grid container sx={{maxWidth: '800px', }}>
+            <Grid item sm={12}  md={4}>
+            <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
                 <TextField
                     sx={{width: '100%'}}
                     value={form.name}
                     label="Child's Name"
                     variant='outlined'
                     color='primary'
+                    size='small'
                     required
                     error={nameError}
                     onChange={e => updateForm('name', e.target.value)}/>
+                    </FormControl>
             </Grid>
-            <Grid item xs={6} md={5} sx={{display: "flex", alignItems: "center", padding: "5px 20px"}}>
+            <Grid item sm={12}  md={4}>
+                <ChildGiftSelect childId={''} selectedId={''} setSelectedGiftId={setSelectedGiftId}/>
+            </Grid>
+            <Grid item sm={12} md={4} sx={{display: "flex", alignItems: "center", padding: "0 20px"}}>
                 <Button type="submit" color="primary" variant='contained'>Add Child</Button>
             </Grid>
 

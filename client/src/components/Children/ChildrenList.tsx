@@ -1,27 +1,24 @@
-import React, {useEffect, useState} from 'react';
-import { ListChildrenRes} from 'types'
+import React, {useEffect} from 'react';
 import {Spinner} from "../comon/Spinner/Spinner";
 import {ChildrenTable} from "./ChildrenTable";
+import {useAppDispatch, useAppSelector} from "../../app/hooks";
+import {RootState} from "../../app/store";
+import {getChildrenAsync} from "../../redux/features/children-slice";
 
 export const ChildrenList = () => {
-    const [data, setData] = useState<ListChildrenRes | null>(null)
-    const refreshChildren = async () => {
-        setData(null)
-        const res = await fetch(`${process.env.REACT_APP_API_URL}/children`)
-        const data = await res.json()
-        setData(data)
-    }
+    const dispatch = useAppDispatch()
+    const children = useAppSelector((state: RootState) => state.children)
+
 
     useEffect(() => {
-        refreshChildren()
-    }, [])
+        dispatch(getChildrenAsync())
+    }, [dispatch])
 
-    if (data === null) {
+    if (children.status === 'loading') {
         return <Spinner/>
     }
     return <>
         <h1>Children:</h1>
-        <ChildrenTable childrenList={data.childrenList} giftsList={data.giftsList}
-                    onChildrenChange={refreshChildren}/>
+        {<ChildrenTable childrenList={children.children.childrenList} giftsList={children.children.giftsList}/>}
     </>
 }

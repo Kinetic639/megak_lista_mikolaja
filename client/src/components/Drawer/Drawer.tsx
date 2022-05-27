@@ -8,17 +8,12 @@ import Divider from '@mui/material/Divider';
 import ListItemText from '@mui/material/ListItemText';
 import ChildCareIcon from '@mui/icons-material/ChildCare';
 import BedroomBabyIcon from '@mui/icons-material/BedroomBaby';
-import BugReportIcon from '@mui/icons-material/BugReport';
 import {
     NavLink as RouterLink,
 } from 'react-router-dom';
 import {ListItemButton} from "@mui/material";
 import {useLocation} from "react-router-dom"
-
-import AppBar from '@mui/material/AppBar';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import Typography from '@mui/material/Typography';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
 import './Drawer.scss'
 
@@ -34,9 +29,9 @@ const menuItems = [
         path: '/gifts',
     },
     {
-        desc: 'Test',
-        icon: <BugReportIcon color="primary"/>,
-        path: '/test',
+        desc: 'Information',
+        icon: <InfoOutlinedIcon color="primary"/>,
+        path: '/information',
     }
 ];
 

@@ -1,5 +1,5 @@
-import React, {MouseEvent, useState} from 'react';
-import {GiftEntity} from 'types';
+import React, {Dispatch, SetStateAction, MouseEvent, useState} from 'react';
+import {ChildEntity, GiftEntity} from 'types';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Dialog from '@mui/material/Dialog';
@@ -8,17 +8,22 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import EditIcon from '@mui/icons-material/Edit';
-import {
-    NavLink as RouterLink,
-} from 'react-router-dom';
+import FormControl from '@mui/material/FormControl';
+import Typography from '@mui/material/Typography';
+import {ChildGiftSelect} from '../ChildGiftSelect/ChildGiftSelect'
+import { useAppDispatch } from '../../app/hooks';
+import { deleteChildAsync } from '../../redux/features/children-slice';
 
 interface Props {
-    gift: GiftEntity;
-    onGiftsChange: () => void;
+    child: ChildEntity;
+    giftsList: GiftEntity[];
+    setEditableChildElement: Dispatch<SetStateAction<string | undefined>>;
 }
 
-export const GiftsTableRow = ({gift, onGiftsChange}: Props) => {
+export const ChildrenReadOnlyTableRow = ({child, giftsList, setEditableChildElement}: Props) => {
     const [open, setOpen] = useState(false)
+    const dispatch = useAppDispatch()
+
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -28,18 +33,12 @@ export const GiftsTableRow = ({gift, onGiftsChange}: Props) => {
         setOpen(false);
     };
 
-    const deleteGift = async (e: MouseEvent) => {
+    const deleteChild = async (e: MouseEvent) => {
         e.preventDefault()
+        setOpen(false);
+dispatch(deleteChildAsync(child))
 
-
-        const res = await fetch(`${process.env.REACT_APP_API_URL}/gifts/${gift.id}`, {
-            method: 'DELETE'
-        })
-        if ([400, 500].includes(res.status)) {
-            const error = await res.json()
-            alert(`Error occurred: ${error.message}`)
-        }
-        onGiftsChange()
+      
     }
 
     return (
@@ -55,21 +54,33 @@ export const GiftsTableRow = ({gift, onGiftsChange}: Props) => {
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        {`Are You sure You want to remove ${gift.name} from Gifts List?`}
+                        {`Are You sure You want to remove ${child.name} from Children List?`}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
-                    <Button color="error" onClick={deleteGift} autoFocus>
+                    <Button color="error" onClick={deleteChild} autoFocus>
                         Remove
                     </Button>
                 </DialogActions>
             </Dialog>
             <tr>
-                <td>{gift.name}</td>
-                <td>{gift.count}</td>
                 <td>
-                    <Button component={RouterLink} to={`/gifts/${gift.id}`} variant="outlined">
+                    <FormControl> 
+                        <Typography sx={{paddingLeft: '25px', minWidth: '270px'}}>
+
+                        {child.name}
+                        </Typography>
+                    </FormControl>
+                    </td>
+                <td>
+                    <ChildGiftSelect childId={child.id as string} selectedId={child.giftId}/>
+                </td>
+                <td>
+                    <Button sx={{width: '70px'}} onClick={()=> {
+                        setEditableChildElement(child.id);
+                        
+                    }} variant="outlined">
                         <EditIcon/>
                     </Button>
                 </td>

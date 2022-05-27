@@ -1,0 +1,15 @@
+.giftsRow {
+  &__name {
+    padding: .85rem 1.4rem;
+    width: 270px;
+  }
+  &__count {
+    padding: .85rem 1.4rem;
+    width: 100px;
+    text-align: center;
+  }
+  &__icon {
+    width: 70px;
+
+  }
+}

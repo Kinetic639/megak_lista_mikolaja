@@ -1,13 +1,9 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import {motion} from "framer-motion"
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import {Appbar} from "../Appbar/Appbar";
-
 import './Layout.scss'
 import {PermanentDrawer} from "../../../components/Drawer/Drawer";
-import Typography from "@mui/material/Typography";
 interface Props {
     children:React.ReactNode
 }
@@ -29,7 +25,6 @@ export const Layout = ({children}: Props) => {
         <Box
             sx={{display: 'flex'}}
         >
-
             <Appbar mobileOpen={mobileOpen} drawerWidth={drawerWidth} handleDrawerToggle={handleDrawerToggle}>
                 Santa's Gifts List
             </Appbar>
