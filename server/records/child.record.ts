@@ -25,7 +25,9 @@ export class ChildRecord implements ChildEntity {
     if (!this.id) {
       this.id = uuid();
     }
-
+    if (this.giftId === '') {
+      this.giftId = null;
+    }
     await pool.execute(
       'INSERT INTO `children`(`id`, `name`, `giftId`) VALUES(:id, :name, :giftId)',
       {

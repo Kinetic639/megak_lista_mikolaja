@@ -83,13 +83,12 @@ export const addChildAsync = createAsyncThunk(
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: payload.name, giftId: payload.giftId }),
     });
-
     if (res.ok) {
       const child = await res.json();
-
       toast.success(`Child ${payload.name}  has been added.`);
       return child;
     }
+    return payload;
   },
 );
 

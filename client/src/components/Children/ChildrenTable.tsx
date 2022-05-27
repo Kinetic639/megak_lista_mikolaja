@@ -15,7 +15,7 @@ export const ChildrenTable = ({childrenList, giftsList}: Props) => {
     const [editableChildElement, setEditableChildElement] = useState<string | undefined>('')
     const [editedChild, setEditedChild] = useState<UpdateChildReq>({
         id: editableChildElement,
-        name: '',
+        name: ''
     })
 
     const handleSubmit = (e: FormEvent) => {

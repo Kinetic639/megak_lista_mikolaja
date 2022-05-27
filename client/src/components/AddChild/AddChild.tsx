@@ -51,6 +51,7 @@ giftId: selectedGiftId
 
 
     const sendForm = async (e: FormEvent) => {
+        
         e.preventDefault()
         setNameError(false)
         
