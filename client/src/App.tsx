@@ -25,7 +25,7 @@ export const App = () => {
     }, [dispatch])
     return (<>
         <ToastContainer 
-position="bottom-left" autoClose={2000} limit={4} theme='colored'/>
+position="top-left" autoClose={2000} limit={4} theme='colored'/>
         <Layout key={location.key}>
                 <Routes>
                     <Route path="/" element={<Navigate replace to="/children" />} />
