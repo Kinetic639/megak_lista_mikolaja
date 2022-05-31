@@ -1,15 +1,13 @@
 import React, {FormEvent,useRef, useEffect, useState} from 'react';
-import {CreateChildReq, ChildEntity} from "types";
+import {CreateChildReq} from "types";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import {Spinner} from "../comon/Spinner/Spinner";
 import Grid from '@mui/material/Grid';
 import { ChildGiftSelect } from '../ChildGiftSelect/ChildGiftSelect';
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { RootState } from 'src/app/store';
+import {  useAppDispatch } from '../../app/hooks';
 import FormControl from '@mui/material/FormControl';
 import { toast } from 'react-toastify';
-import { addChildAsync, getChildrenAsync } from '../../redux/features/children-slice';
+import { addChildAsync } from '../../redux/features/children-slice';
 
 
 
@@ -66,11 +64,10 @@ giftId: selectedGiftId
 
 
     return <form noValidate autoComplete="off" onSubmit={sendForm}>
-        <Grid container sx={{maxWidth: '800px', }}>
-            <Grid item sm={12}  md={4}>
-            <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
+        <Grid container sx={{maxWidth: '800px', }} spacing={1}>
+            <Grid item xs={12}  md={5} >
+            <FormControl sx={{ m: 1 ,maxWidth: 460, minWidth: 250, width: '100%' }} size="small">
                 <TextField
-                    sx={{width: '100%'}}
                     value={form.name}
                     label="Child's Name"
                     variant='outlined'
@@ -78,13 +75,14 @@ giftId: selectedGiftId
                     size='small'
                     required
                     error={nameError}
+                    InputProps={{ inputProps: { minLength: 3, maxLength: 25}}}
                     onChange={e => updateForm('name', e.target.value)}/>
                     </FormControl>
             </Grid>
-            <Grid item sm={12}  md={4}>
+            <Grid item  >
                 <ChildGiftSelect childId={''} selectedId={''} setSelectedGiftId={setSelectedGiftId}/>
             </Grid>
-            <Grid item sm={12} md={4} sx={{display: "flex", alignItems: "center", padding: "0 20px"}}>
+            <Grid item  sx={{display: "flex", alignItems: "center"}}>
                 <Button type="submit" color="primary" variant='contained'>Add Child</Button>
             </Grid>
 

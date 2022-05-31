@@ -67,7 +67,7 @@ dispatch(deleteChildAsync(child))
             <tr>
                 <td>
                     <FormControl> 
-                        <Typography sx={{paddingLeft: '25px', minWidth: '270px'}}>
+                        <Typography >
 
                         {child.name}
                         </Typography>

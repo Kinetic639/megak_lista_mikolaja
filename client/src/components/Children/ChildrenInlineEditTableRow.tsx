@@ -38,7 +38,7 @@ export const ChildrenInlineEditTableRow = ({
     <>
       <tr>
         <td>
-          <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
+          <FormControl sx={{ m: 1 }} size="small">
             <TextField
               value={form.name}
               label="Edit Child"

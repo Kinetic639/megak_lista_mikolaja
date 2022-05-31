@@ -1,16 +1,14 @@
 import React, {FormEvent, useState} from 'react';
-import {CreateGiftReq, GiftEntity} from "types";
+import {CreateGiftReq} from "types";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import {Spinner} from "../comon/Spinner/Spinner";
 import Grid from '@mui/material/Grid';
-import {useAppDispatch, useAppSelector} from "../../app/hooks";
-import {RootState} from "../../app/store";
+import {useAppDispatch} from "../../app/hooks";
 import {addGiftAsync} from "../../redux/features/gifts-slice";
+import { toast } from 'react-toastify';
 
 export const AddGift = () => {
     const dispatch = useAppDispatch()
-    const giftsList = useAppSelector((state: RootState) => state.gifts)
 
     const [form, setForm] = useState<CreateGiftReq>({
         name: "",
@@ -31,14 +29,16 @@ export const AddGift = () => {
         setNameError(false)
         setCountError(false)
         
-        if (!form.name || form.name.length < 3 || form.name.length > 55) {
+        if (!form.name || form.name.length < 3 || form.name.length > 25) {
             setNameError(true)
+            toast.error("Gift's name must be between 3 and 55 letters long!")
         } else if (!form.count || form.count < 1 || form.count > 999999) {
             setCountError(true)
+            toast.error("Amount must be between 1 and 999999!")
         } else {
             dispatch(addGiftAsync(form))
         }
-
+       
     }
 
 
@@ -46,10 +46,10 @@ export const AddGift = () => {
 
     return <form noValidate autoComplete="off" onSubmit={sendForm}>
 
-        <Grid container spacing={2} sx={{maxWidth: '600px', }}>
-            <Grid item xs={12}  md={6}>
-                <TextField
-                    sx={{width: '100%'}}
+        <Grid container spacing={2} sx={{maxWidth: '500px', }}>
+            <Grid item xs={12}  sm={6}>
+                <TextField 
+                    sx={{width: '100%', maxWidth: '320px'}}
                     value={form.name}
                     label="Add Gift"
                     variant='outlined'
@@ -59,8 +59,8 @@ export const AddGift = () => {
                     error={nameError}
                     onChange={e => updateForm('name', e.target.value)}/>
             </Grid>
-            <Grid item xs={6} md={3}>
-                <TextField
+            <Grid item  >
+                <TextField sx={{maxWidth: '80px'}}
                     value={form.count}
                     label="Count"
                     type="number"
@@ -71,8 +71,8 @@ export const AddGift = () => {
                     error={countError}
                     onChange={e => updateForm('count', e.target.value)}/>
             </Grid>
-            <Grid item xs={6} md={3} sx={{display: "flex", alignItems: "center"}}>
-                <Button type="submit" color="primary" variant='contained'>Add Gift</Button>
+            <Grid item  sx={{display: "flex", alignItems: "center"}}>
+                <Button sx={{width: '100%'}} type="submit" color="primary" variant='contained'>Add Gift</Button>
             </Grid>
 
         </Grid>
