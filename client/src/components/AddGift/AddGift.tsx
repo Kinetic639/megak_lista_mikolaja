@@ -21,6 +21,13 @@ export const AddGift = () => {
             ...form,
             [key]: value,
         }))
+    } 
+    
+    const clearForm = () => {
+        setForm({
+            name: "",
+            count: 0
+        })
     }
 
 
@@ -37,6 +44,7 @@ export const AddGift = () => {
             toast.error("Amount must be between 1 and 999999!")
         } else {
             dispatch(addGiftAsync(form))
+            clearForm()
         }
        
     }

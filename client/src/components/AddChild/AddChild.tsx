@@ -26,6 +26,7 @@ giftId: selectedGiftId
         name: "",
         giftId: selectedGiftId
     })
+    
     const clearForm = () => {
         setForm(initialFormState)
         setSelectedGiftId('')
